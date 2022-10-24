@@ -23,7 +23,7 @@
                 <img src="{{ user.profile_image_url_https }}" class="rounded-circle" height="24" width="24">@{{ user.screen_name }}でログイン中
                 <a href="/logout"><button class="btn btn-secondary m-3">ログアウト</button></a>
                 {%- else -%}
-                <a href="{{ auth_url }}"><button class="btn btn-primary m-3">Twitterでログイン</button></a>
+                <a href="{{ url_for('auth') }}"><button class="btn btn-primary m-3">Twitterでログイン</button></a>
                 {%- endif -%}
             </div>
             {%- if user -%}

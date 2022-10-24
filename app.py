@@ -53,14 +53,19 @@ def index():
         )
     session.pop("access_token", None)
     session.pop("access_token_secret", None)
+    return render_template("index.html")
+
+
+@app.route("/auth")
+def auth():
     try:
         auth_url = auth.get_authorization_url()
         session.permanent = True
         session["request_token"] = auth.request_token.get("oauth_token")
     except Exception as e:
         print(e)
-        return "何かがおかしい"
-    return render_template("index.html", auth_url=auth_url)
+        return redirect(url_for("index"))
+    return redirect(auth_url)
 
 
 @app.route("/callback")
