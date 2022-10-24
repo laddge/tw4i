@@ -57,7 +57,8 @@ def index():
 
 
 @app.route("/auth")
-def auth():
+def authorize():
+    auth = tweepy.OAuthHandler(CK, CS, CALLBACK)
     try:
         auth_url = auth.get_authorization_url()
         session.permanent = True
