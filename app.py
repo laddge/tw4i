@@ -55,6 +55,7 @@ def index():
     session.pop("access_token_secret", None)
     try:
         auth_url = auth.get_authorization_url()
+        session.permanent = True
         session["request_token"] = auth.request_token.get("oauth_token")
     except Exception as e:
         print(e)
@@ -70,6 +71,7 @@ def callback():
     auth.request_token = {"oauth_token": token, "oauth_token_secret": verifier}
     try:
         auth.get_access_token(verifier)
+        session.permanent = True
         session["access_token"] = auth.access_token
         session["access_token_secret"] = auth.access_token_secret
     except Exception as e:
